@@ -54,7 +54,5 @@ class MainNavigation {
         const widget = Text("Navigation Error!");
         return MaterialPageRoute(builder: (_) => widget);
     }
-    const widget = Text("Navigation Error!");
-    return MaterialPageRoute(builder: (_) => widget);
   }
 }

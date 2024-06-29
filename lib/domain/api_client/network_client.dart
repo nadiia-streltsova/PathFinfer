@@ -8,7 +8,7 @@ import 'package:pathfinder/domain/entities/data_entity.dart';
 class NetworkClient {
   final _dio = Dio();
 
-  void validateData(
+  Future<void> validateData(
     String path,
     List<Map<String, dynamic>> bodyParams,
   ) async {
@@ -29,8 +29,6 @@ class NetworkClient {
         throw ApiClientException(ApiClientExceptionType.tooManyRequests);
       } else if (error.response?.statusCode == 500) {
         throw ApiClientException(ApiClientExceptionType.internalServerError);
-      } else {
-        throw ApiClientException(ApiClientExceptionType.network);
       }
     }
   }

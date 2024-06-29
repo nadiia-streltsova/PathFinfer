@@ -51,7 +51,7 @@ class _ProcessScreenWidgetState extends State<ProcessScreenWidget> {
                     height: 100,
                     child: !isCompleted
                         ? const CircularProgressIndicator(color: Colors.lightBlue)
-                        : const SizedBox.shrink(),
+                        : const _ErrorMessageWidget(),
                   ),
                 ),
               ],
@@ -65,6 +65,24 @@ class _ProcessScreenWidgetState extends State<ProcessScreenWidget> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _ErrorMessageWidget extends StatelessWidget {
+  const _ErrorMessageWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final errorMessage = context.select((ProcessScreenViewModel m) => m.errorMessage);
+    if (errorMessage == null) return const SizedBox.shrink();
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Text(
+        errorMessage,
+        style: const TextStyle(fontSize: 17, color: Colors.red),
       ),
     );
   }

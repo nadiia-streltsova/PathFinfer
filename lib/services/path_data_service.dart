@@ -48,19 +48,23 @@ class PathDataService {
     }
 
     try {
-      _networkClient.validateData(path!, params);
-    } on ApiClientException catch (error) {
-      switch (error.type) {
-        case ApiClientExceptionType.notCorrectResults:
-          return "Results is not correct";
-        case ApiClientExceptionType.tooManyRequests:
-          return "Too Many Requests";
-        case ApiClientExceptionType.internalServerError:
-          return "Internal Server Error";
-        case ApiClientExceptionType.network:
-          return "Something went wrong, please try again.";
-        case ApiClientExceptionType.wrongUrl:
-          return "Wrong URL, please fix it and try again.";
+      await _networkClient.validateData(path!, params);
+    } catch (error) {
+      if (error is ApiClientException) {
+        switch (error.type) {
+          case ApiClientExceptionType.notCorrectResults:
+            return "Results is not correct";
+          case ApiClientExceptionType.tooManyRequests:
+            return "Too Many Requests";
+          case ApiClientExceptionType.internalServerError:
+            return "Internal Server Error";
+          case ApiClientExceptionType.network:
+            return "Something went wrong, please try again.";
+          case ApiClientExceptionType.wrongUrl:
+            return "Wrong URL, please fix it and try again.";
+        }
+      } else {
+        return error.toString();
       }
     }
     return null;
