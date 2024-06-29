@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pathfinder/navigation/main_navigation.dart';
 import 'package:pathfinder/widgets/result_list_screen/result_list_screen_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +13,10 @@ class ResultListScreenWidget extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Result list screen"),
+        leading:BackButton(
+            onPressed: () {
+              Navigator.of(context).pushReplacementNamed(MainNavigationRouteNames.homeScreen);
+            }),
       ),
       body: ListView.separated(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,

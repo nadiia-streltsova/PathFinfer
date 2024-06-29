@@ -13,7 +13,7 @@ class PreviewScreenWidget extends StatelessWidget {
     final pathString = model.solutionData.pathString;
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Result list screen"),
+          title: const Text("Preview screen"),
         ),
         body: Column(
           children: [
